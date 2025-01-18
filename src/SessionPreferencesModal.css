@@ -1,0 +1,126 @@
+.preferences-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .preferences-modal-content {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .preferences-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+  }
+  
+  .preferences-modal-header h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0;
+  }
+  
+  .preferences-close-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #666;
+    cursor: pointer;
+    padding: 4px;
+    line-height: 1;
+  }
+  
+  .preferences-form-group {
+    margin-bottom: 24px;
+  }
+  
+  .preferences-form-group label {
+    display: block;
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 8px;
+  }
+  
+  .preferences-select-wrapper {
+    position: relative;
+  }
+  
+  .preferences-select {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    background-color: white;
+    appearance: none;
+    cursor: pointer;
+  }
+  
+  .preferences-select:focus {
+    outline: none;
+    border-color: #8b5cf6;
+  }
+  
+  .preferences-select-arrow {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #666;
+    font-size: 12px;
+  }
+  
+  .preferences-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 32px;
+  }
+  
+  .preferences-cancel-button {
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    color: #666;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .preferences-cancel-button:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .preferences-save-button {
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    background-color: #8b5cf6;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .preferences-save-button:hover {
+    background-color: #7c3aed;
+  }

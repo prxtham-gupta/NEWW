@@ -1,0 +1,881 @@
+/* src/App.css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #FAF5FF99;
+}
+
+.login-box {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.input-container {
+  margin-bottom: 15px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+p {
+  text-align: center;
+  margin-top: 10px;
+  color: #555;
+}
+
+p button {
+  background: none;
+  border: none;
+  color: #4caf50;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+p button:hover {
+  color: #388e3c;
+}
+
+.left-section {
+  width: 380px;
+  height: 100vh;
+  background-color: white; /* Black background */
+  color: #090909; /* White text color */
+  padding: 20px;
+  box-shadow: 2px 0 5px rgb(246, 245, 245); /* Subtle shadow for depth */
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Spacing between elements */
+  overflow-y: auto; /* Enable scrolling if content overflows */
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #a020f0; /* Purple color for logo text */
+}
+.hidden {
+  display: none;
+}
+
+/* Main content area */
+.main-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.logo-icon {
+  font-size: 28px; /* Slightly larger icon size */
+}
+
+/* Search Bar Container */
+.search-container {
+  width: 100%; /* Full width of parent */
+}
+
+.search-bar {
+  width: 100%; /* Full width of the container */
+  padding: 10px;
+  border: none; /* Remove default border */
+  border-radius: 20px; /* Rounded edges for modern look */
+  font-size: 14px; /* Standard font size */
+  outline: none; /* Remove focus outline */
+  background-color: white; /* Dark gray background */
+  color: black; /* White text color */
+  box-shadow: 0 2px 5px rgb(145, 142, 142); /* Subtle shadow */
+}
+
+/* Sessions List */
+/* Add these styles to App.css */
+
+.session-item {
+  padding: 16px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.session-item:hover {
+  background-color: #f8f6fc;
+}
+
+.session-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.session-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.session-pronouns {
+  font-size: 12px;
+  color: #666;
+}
+
+.session-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #666;
+}
+
+.session-timestamp {
+  color: #666;
+}
+
+.session-duration {
+  color: #7c3aed;
+  font-weight: 500;
+}
+
+.no-sessions {
+  text-align: center;
+  padding: 24px;
+  color: #666;
+  font-size: 14px;
+}
+/* Dashboard Styles */
+/* Dashboard Container */
+.dashboard {
+  width: 76%; /* Fixed width */
+  height: 150px; /* Fixed height */
+  position: absolute;
+  top: 0;
+  left: 381px;
+  display: flex;
+  flex-direction: column; /* Stack welcome message and tabs */
+  justify-content: flex-start;
+  padding: 20px; /* Padding for internal spacing */
+  background-color: white; /* White background */
+  border: 1px solid #A4A4A4; /* Light gray border */
+ 
+}
+
+/* Top Row (Welcome Message and Profile Section) */
+.dashboard-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between; /* Space between welcome message and profile */
+  margin-bottom: 5px; /* Space below the top row */
+  z-index: 3;
+}
+/* Welcome Message */
+/* Welcome Message */
+.welcome-message-container {
+  display: flex;
+  flex-direction: column; /* Stack "Welcome back" and tabs vertically */
+  justify-content: flex-start; /* Align to the extreme left */
+  padding-left: 0px; /* Space between "Welcome back" and tabs */
+}
+.welcome-message h2 {
+  padding-top: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #a020f0; /* Purple text color */
+  margin: 0; /* Remove default margin */
+  line-height: 1.2; /* Adjust line height */
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow: hidden; /* Handle overflow gracefully */
+  text-overflow: ellipsis; /* Add ellipsis if the text is too long */
+  padding-right: 60px;
+}
+
+
+/* Profile Section */
+.profile {
+  padding-right: 100px;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between initials and full name */
+}
+
+/* Profile Initials */
+.profile .initials {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #f3e8ff; /* Light purple background */
+  color: #7c3aed; /* Purple text color */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* Full Name */
+.profile .full-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333; /* Dark gray */
+}
+
+/* Dropdown Arrow */
+.profile .dropdown {
+  font-size: 14px;
+  color: #333; /* Dark gray */
+  cursor: pointer;
+}
+
+/* Bottom Row (Tabs Section) */
+.dashboard-tabs {
+  top: 20px;
+  display: flex;
+  gap: 30px; /* Space between tabs */
+}
+
+/* Tab Item */
+.dashboard-tabs .tab {
+  padding-top: 35px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333; /* Dark gray */
+  cursor: pointer;
+  position: relative;
+}
+
+/* Active Tab */
+.dashboard-tabs .tab.active {
+  color: #7c3aed; /* Purple color for active tab */
+}
+
+.dashboard-tabs .tab.active::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #7c3aed; /* Purple underline for active tab */
+}
+/* Record Session Container */
+
+/* Recording Button */
+.recording-button {
+  width: 200px;
+  height: 50px;
+  background-color: #7c3aed; /* Purple background */
+  color: white; /* White text */
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px; /* Rounded button */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; /* Space for icons or text */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for button */
+}
+
+/* Start Button Specific */
+.recording-button.start {
+  background-color: #7c3aed; /* Purple background for start */
+}
+
+/* Stop Button Specific */
+.recording-button.stop {
+  background-color: #e53e3e; /* Red background for stop */
+}
+
+/* Session Info */
+.session-info {
+  text-align: center;
+  margin-top: 20px; /* Space between button and text */
+  color: #333; /* Dark gray text */
+}
+
+.session-info h3 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #7c3aed; /* Purple text for title */
+}
+
+.session-info p {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #666; /* Medium gray for description */
+}
+
+
+
+/* Upload Session Container */
+
+
+/* Upload Box */
+.upload-box {
+  width: 100%;
+  max-width: 400px;
+  padding: 40px;
+  text-align: center;
+  background-color: white; /* White background */
+  border-radius: 10px;
+  border: 2px dashed #a020f0; /* Purple dashed border */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Upload Icon */
+.upload-icon {
+  font-size: 48px;
+  color: #a020f0; /* Purple color */
+  margin-bottom: 20px;
+}
+
+/* Upload Text */
+.upload-text p {
+  font-size: 16px;
+  color: #333;
+  margin: 5px 0;
+}
+
+.upload-text .file-types {
+  font-size: 14px;
+  color: #666;
+}
+.record-session-container,
+.upload-session-container {
+  width: 1150px;
+  height: 567px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f6fc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 149px;
+  right: 0.1px;
+}
+
+.recording-button,
+.stop-recording-button {
+  width: 200px;
+  height: 50px;
+  background-color: #7c3aed;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.stop-recording-button {
+  background-color: #f87171;
+}
+
+
+
+/* Add these styles to your App.css */
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background-color: white;
+  border-radius: 8px;
+  padding: 24px;
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+}
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.popup-header h3 {
+  font-size: 20px;
+  font-weight: 500;
+  color: #1A1A1A;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #666;
+  cursor: pointer;
+  padding: 0;
+  padding-left: 150px;
+}
+.close-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Remove focus outline but keep it accessible */
+.close-button:focus {
+  outline: none;
+}
+
+.close-button:focus-visible {
+  outline: 2px solid #666;
+  outline-offset: 2px;
+}
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #333;
+}
+
+.modern-input,
+.modern-select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #333;
+}
+
+.modern-select {
+  background-color: white;
+  cursor: pointer;
+}
+
+.popup-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+  gap: 8px;
+}
+
+.skip-button,
+.save-button {
+  padding: 10px 24px;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  
+}
+
+.skip-button {
+  background-color: #f3f4f6;
+  border: 1px solid #ddd;
+  color: #666;
+}
+
+.save-button {
+  background-color: #7c3aed;
+  border: none;
+  color: white;
+}
+/* Add these styles to your existing App.css */
+/* Add these styles to App.css */
+
+.session-card {
+  padding: 24px;
+  background: white;
+  border-radius: 8px;
+  margin: 20px;
+  box-shadow: none;
+}
+
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.patient-name {
+  font-size: 18px;
+  font-weight: 500;
+  color: #000;
+}
+
+.manage-profile {
+  color: #666;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.past-medical-history {
+  color: #666;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.summary-options {
+  margin: 24px 0;
+}
+
+.summary-options h2 {
+  font-size: 16px;
+  font-weight: 500;
+  color: #000;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.summaries-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.summary-box {
+  background: #fff;
+  padding: 16px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+}
+
+.summary-box h3 {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.summary-box p {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #000;
+  white-space: pre-wrap;
+}
+
+.i-prefer-text {
+  color: #666;
+  font-size: 14px;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+.transcript-section {
+  margin-top: 24px;
+}
+
+.transcript-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.transcript-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #000;
+}
+
+.transcript-duration {
+  color: #666;
+  font-size: 14px;
+}
+
+.transcript-text {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #000;
+  white-space: pre-wrap;
+}
+
+.edit-button {
+  color: #666;
+  font-size: 14px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 12px;
+  border-radius: 4px;
+}
+
+.edit-button:hover {
+  background: #f5f5f5;
+}
+
+.audio-section {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #eee;
+}
+
+.audio-player {
+  width: 100%;
+  height: 36px;
+}
+
+.download-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #666;
+  font-size: 14px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 0;
+  margin-top: 12px;
+}
+
+.download-button:hover {
+  color: #000;
+}
+.session-card {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.recording-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.recording-time {
+  font-size: 1.125rem;
+  color: #666;
+}
+
+.summaries-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.summary-box {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 6px;
+}
+
+.summary-box h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.summary-box p {
+  color: #666;
+  line-height: 1.5;
+}
+
+.transcript-text {
+  color: #333;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.audio-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.audio-player {
+  flex: 1;
+}
+
+.download-button {
+  padding: 0.5rem 1rem;
+  background: #f0f0f0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #333;
+  font-weight: 500;
+}
+
+.download-button:hover {
+  background: #e0e0e0;
+}
+
+/* Add these styles to your App.css */
+
+.processing-message {
+  text-align: center;
+  color: #666;
+  font-size: 0.9rem;
+  margin: 1rem 0;
+}
+
+.prefer-button {
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: #f0f0f0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.prefer-button:hover {
+  background: #e0e0e0;
+  color: #333;
+}
+
+.recording-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Update existing styles */
+.audio-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.audio-player {
+  width: 100%;
+}
+.filter-dropdown {
+  position: relative;
+  margin: 16px;
+}
+
+.filter-button {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.filter-button-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #000000;
+}
+
+.filter-icon {
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.dropdown-icon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.2s ease;
+}
+
+.dropdown-icon.rotate {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 8px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.dropdown-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  text-align: left;
+}
+
+.dropdown-item:hover {
+  background-color: #f7fafc;
+}

@@ -1,0 +1,202 @@
+.dictionary-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    z-index: 1000;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  
+  .dictionary-modal-content {
+    background: white;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0;
+  }
+  
+  .dictionary-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+    border-bottom: 1px solid #f0f0f0;
+    background-color: #fff;
+  }
+  
+  .dictionary-modal-header h2 {
+    font-size: 20px;
+    font-weight: 500;
+    color: #1a1a1a;
+    margin: 0 0 4px 0;
+  }
+  
+  .dictionary-subtitle {
+    color: #666;
+    margin: 0;
+    font-size: 14px;
+    font-weight: normal;
+  }
+  
+  .dictionary-header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .records-count {
+    color: #8b5cf6;
+    font-size: 14px;
+    font-weight: 400;
+  }
+  
+  .dictionary-close-button {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #666;
+    cursor: pointer;
+    padding: 4px;
+    line-height: 1;
+    margin-left: 16px;
+  }
+  
+  .dictionary-input-section {
+    display: flex;
+    gap: 16px;
+    padding: 20px;
+    align-items: flex-end;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .dictionary-input-group {
+    flex: 1;
+  }
+  
+  .dictionary-input-group label {
+    display: block;
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 8px;
+  }
+  
+  .dictionary-input {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    background-color: white;
+  }
+  
+  .dictionary-input:focus {
+    outline: none;
+    border-color: #8b5cf6;
+  }
+  
+  .add-dictionary-button {
+    padding: 12px 12px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    background-color: #8b5cf6;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    height: 48px;
+    width: 190px;
+  }
+  
+  .add-dictionary-button:hover {
+    background-color: #7c3aed;
+  }
+  
+  .dictionary-table {
+    width: 100%;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  
+  .dictionary-table-header {
+    display: flex;
+    background-color: #f9fafb;
+    padding: 12px;
+    font-weight: 500;
+    color: #374151;
+  }
+  
+  .dictionary-table-row {
+    display: flex;
+    padding: 12px;
+    border-top: 1px solid #e0e0e0;
+  }
+  
+  .id-column {
+    width: 80px;
+    color: #666;
+  }
+  
+  .term-column {
+    flex: 1;
+  }
+  
+  .actions-column {
+    width: 48px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .action-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #666;
+    font-size: 20px;
+    padding: 4px 8px;
+  }
+  
+  .action-button:hover {
+    color: #8b5cf6;
+  }
+  .actions-column {
+    position: relative; /* Ensure the dropdown is positioned relative to this container */
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 100%; /* Position the dropdown directly below the button */
+    right: 40%;; /* Align it to the left edge of the parent container */
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: black;
+    padding: 5px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 10; /* Ensure the dropdown appears above other elements */
+  }
+  
+  .dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 5px 10px;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #000; /* Set text color to black */
+    font-size: 14px; /* Optional: Adjust font size for better readability */
+  }
+  
+  .dropdown-item:hover {
+    background: #f0f0f0;
+    color: #000; /* Ensure the text color remains black on hover */
+  }
+  
+  

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Download } from 'lucide-react';
 import CircularProgress from '@mui/material/CircularProgress'
 import './SessionContent.css';
-
+import ReactMarkdown from 'react-markdown';
 const AudioSection = ({ audioUrl }) => {
   const fileName = "6500.wav";
   const audioLength = "4:21";
@@ -80,6 +80,7 @@ const SessionContent = ({
   setTranscript,
   setSummaries,
   setIsProcessing,
+  saveSessionData,
 }) => {
   const [editingSummary, setEditingSummary] = useState(null);
   const [editedText, setEditedText] = useState('');
@@ -92,6 +93,8 @@ const SessionContent = ({
   const [visitType, setVisitType] = useState('New patient');
   const [chosenSummary, setChosenSummary] = useState(null);
   const [processingError, setProcessingError] = useState(null);
+
+  console.log(summaries)
 
   const handleStartNewSession = () => {
     setShowResults(false);
@@ -106,13 +109,24 @@ const SessionContent = ({
     await handleSave();
     setShowResults(true);
   };
-  console.log(isLoading)
 
   if(isLoading){
-    return <div >
-        <CircularProgress color="secondary" size={100}/>
-    </div>
+     return (
+      <div className="circular-container">
+        <CircularProgress color="secondary" size={100} />
+      </div>
+    );
+    
   }
+  const handleSaveSummary = (summaryKey, updatedText) => {
+    // Call the parent callback to save the summary data
+    saveSessionData({ summaryKey, updatedText, type: 'summary' });
+  };
+  
+  const handleSaveTranscript = (updatedTranscript) => {
+    // Call the parent callback to save the transcript data
+    saveSessionData({ updatedTranscript, type: 'transcript' });
+  };
 
   const renderInitialView = () => (
     <div className="record-session-container">
@@ -195,7 +209,7 @@ const SessionContent = ({
                   <>
                     <div className="summary-box">
                       <h3>Summary 1</h3>
-                      <p>{summaries.summary1}</p>
+                      <ReactMarkdown>{summaries.summary1}</ReactMarkdown>
                       <button
                         className="prefer-button"
                         onClick={() => {
@@ -207,7 +221,7 @@ const SessionContent = ({
                     </div>
                     <div className="summary-box">
                       <h3>Summary 2</h3>
-                      <p>{summaries.summary2}</p>
+                      <ReactMarkdown>{summaries.summary2}</ReactMarkdown>
                       <button
                         className="prefer-button"
                         onClick={() => {
@@ -222,7 +236,7 @@ const SessionContent = ({
                   // Show only the chosen summary
                   <div className="summary-boxx">
                     <h3>Selected Summary</h3>
-                    <p>{summaries[chosenSummary]}</p>
+                    <ReactMarkdown>{summaries[chosenSummary]}</ReactMarkdown>
                     <button
                       className="edit-button"
                       onClick={() => {
@@ -264,11 +278,11 @@ const SessionContent = ({
                 <button
                   className="edit-confirm-button"
                   onClick={() => {
-                    setSummaries({
-                      ...summaries,
-                      [editingSummary]: editedText
-                    });
-                    setEditingSummary(null);
+                    if (editingSummary) {
+                      handleSaveSummary(editingSummary, editedText);
+                    } else {
+                      handleSaveTranscript(editedTranscript);
+                    }
                   }}
                 >
                   Save
@@ -285,7 +299,7 @@ const SessionContent = ({
         <div className="transcript-box">
           {!isEditingTranscript ? (
             <>
-              <p className="transcript-text">{transcript}</p>
+              < ReactMarkdown className="transcript-text">{transcript}</ReactMarkdown>
               <button
                 className="edit-button"
                 onClick={() => {
@@ -318,6 +332,7 @@ const SessionContent = ({
                   onClick={() => {
                     setTranscript(editedTranscript); // Update the main transcript
                     setIsEditingTranscript(false);
+                    handleSaveTranscript(editedTranscript);
                   }}
                 >
                   Save
@@ -476,7 +491,7 @@ const SessionContent = ({
       )}
 
       {/* Main Content */}
-      {isInSession && (transcript || uploadedFileUrl) ? renderResultsView() : renderInitialView()}
+      {isInSession && (transcript || uploadedFileUrl || Object.keys(summaries).length)? renderResultsView() : renderInitialView()}
     </>
   );
 };

@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
 import Dashboard from './Dashboard';
 import LeftSection from './components/LeftSection';
 import RecordSession from './components/RecordSession';
 import UploadSession from './components/UploadSession';
+import SessionContent from './SessionContent';
+import SessionContext from './context/SessionContext';
 
 const App = () => {
   const [isCreatingAccount, setIsCreatingAccount] = useState(false);
@@ -15,18 +17,18 @@ const App = () => {
     fullName: ''
   });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
   const navigate = useNavigate();
-
+  const context = useContext(SessionContext);
+  const {user,setUser} =context;
 
   useEffect(()=>{
     const loggedInUser = sessionStorage.getItem("user");
     if(loggedInUser){
-      setUser(loggedInUser);
+      setUser(JSON.parse(loggedInUser));
       setIsLoggedIn(true);
     }
   },[])
-  console.log(user);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

@@ -4,7 +4,8 @@ import ProfileModal from './ProfileModal';
 import SessionPreferencesModal from './SessionPreferencesModal';
 import MedicalDictionaryModal from './MedicalDictionaryModal';
 import { Navigate } from 'react-router-dom';
-const ProfileDropdown = ({ fullName, title, onProfileUpdate }) => {
+
+const ProfileDropdown = ({ user, onProfileUpdate }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showPreferencesModal, setShowPreferencesModal] = useState(false);
@@ -52,13 +53,13 @@ const ProfileDropdown = ({ fullName, title, onProfileUpdate }) => {
     setIsOpen(false);
   };
 
-  
+  console.log(user)
 
   return (
     <div className="profile-container" ref={dropdownRef}>
       <div className="profile" onClick={() => setIsOpen(!isOpen)}>
-        <div className="initials">{getInitials(fullName || 'User')}</div>
-        <div className="full-name">{fullName}</div>
+        <div className="initials">{getInitials(user?.fullName || 'User')}</div>
+        <div className="full-name">{user?.fullName}</div>
         <div className={`dropdown-arrow ${isOpen ? 'open' : ''}`}>▼</div>
       </div>
 
@@ -86,7 +87,7 @@ const ProfileDropdown = ({ fullName, title, onProfileUpdate }) => {
       <ProfileModal
         isOpen={showProfileModal}
         onClose={() => setShowProfileModal(false)}
-        userData={{ name: fullName, title: title }}
+        user={user}
         onSave={(data) => {
           onProfileUpdate(data);
           setShowProfileModal(false);

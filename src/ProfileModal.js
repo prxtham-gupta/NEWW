@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './ProfileModal.css';
+import SessionContext from './context/SessionContext';
 
-const ProfileModal = ({ isOpen, onClose, userData, onSave }) => {
+const ProfileModal = ({ isOpen, onClose, user, onSave }) => {
+  // const context = useContext(SessionContext);
+  // const {user,setUser}=context;
   const [formData, setFormData] = useState({
-    name: userData?.name || '',
-    title: userData?.title || ''
+    fullName:user?.fullName || "User",
+    title: user?.title || 'title'
   });
 
   const handleChange = (e) => {
@@ -17,9 +20,12 @@ const ProfileModal = ({ isOpen, onClose, userData, onSave }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    sessionStorage.setItem('user', JSON.stringify(formData)); // Save to sessionStorage
+
     onSave(formData);
     onClose();
   };
+  console.log(user)
 
   if (!isOpen) return null;
 
@@ -37,8 +43,8 @@ const ProfileModal = ({ isOpen, onClose, userData, onSave }) => {
             <input
               type="text"
               id="name"
-              name="name"
-              value={formData.name}
+              name="fullName"
+              value={formData?.fullName}
               onChange={handleChange}
               placeholder="Enter your name"
               className="form-input"
@@ -51,7 +57,7 @@ const ProfileModal = ({ isOpen, onClose, userData, onSave }) => {
               type="text"
               id="title"
               name="title"
-              value={formData.title}
+              value={formData?.title}
               onChange={handleChange}
               placeholder="Enter your title"
               className="form-input"

@@ -234,7 +234,7 @@
   border: 1px solid #e5e7eb;
   border-radius: 24px;
   padding: 16px;
-  width: 1600px;
+  width: 1100px;
 }
 .summary-box h3 {
   color: #7c3aed;
@@ -432,3 +432,7 @@
 }
 
 
+.circular-container {
+  margin-left: 500px; /* Move to the right */
+  margin-top: 240px;  /* Move down */
+}

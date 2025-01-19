@@ -133,40 +133,81 @@ p button:hover {
 /* Sessions List */
 /* Add these styles to App.css */
 
+/* Style for the session item container */
 .session-item {
-  padding: 16px;
-  border-bottom: 1px solid #eee;
-  cursor: pointer;
-  transition: background-color 0.2s;
+  border: 1px solid #e2e2e2;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  background-color: #fff;
+  padding: 8px;
+  position: relative;
 }
 
-.session-item:hover {
-  background-color: #f8f6fc;
-}
-
+/* Session header for name and more options */
 .session-header {
   display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 4px;
-}
-
-.session-name {
-  font-size: 14px;
-  font-weight: 600;
-  color: #333;
-  margin: 0;
-}
-
-.session-pronouns {
-  font-size: 12px;
-  color: #666;
-}
-
-.session-info {
-  display: flex;
   justify-content: space-between;
-  font-size: 12px;
+  align-items: center;
+}
+
+/* Session name style */
+.session-name {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Dropdown menu styling */
+.relative {
+  position: relative;
+}
+
+button[aria-label="More options"] {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Dropdown container */
+.relative .absolute {
+  position: absolute;
+  right: 0;
+  top: 24px; /* Adjust this if necessary */
+  background-color: white;
+  border: 1px solid #e2e2e2;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  width: 150px; /* Set width to keep it compact */
+  padding: 4px 0;
+  z-index: 10;
+}
+
+/* Dropdown button styles */
+.relative .absolute button {
+  width: 100%;
+  padding: 8px;
+  background-color: white;
+  border: none;
+  text-align: left;
+  font-size: 14px; /* Make text size smaller */
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Space between icon and text */
+}
+
+.relative .absolute button:hover {
+  background-color: #f5f5f5;
+}
+
+/* Add some padding between icon and text */
+.relative .absolute button svg {
+  margin-right: 8px;
+}
+
+/* Session info (for timestamp and duration) */
+.session-info {
+  margin-top: 8px;
+  font-size: 14px;
   color: #666;
 }
 
@@ -177,6 +218,15 @@ p button:hover {
 .session-duration {
   color: #7c3aed;
   font-weight: 500;
+}
+.session-item .relative button {
+  margin-right: 8px; /* Adjust this value as needed */
+}
+
+.session-item .relative {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Adds space between icons or elements */
 }
 
 .no-sessions {

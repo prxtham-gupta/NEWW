@@ -1,50 +1,63 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { MoreVertical } from 'lucide-react';
+import SessionContext from '../context/SessionContext';
 import '../App.css';
 
 const LeftSection = () => {
-  const [sessions, setSessions] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [filterType, setFilterType] = useState('all');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  // const [selectedSummary, setSelectedSummary] = useState(null);
+  // const [selectedTranscript, setSelectedTranscript] = useState(null);
+  // const [sessionList, setSessionList] = useState(sessions); // Add state for sessions
+
+  const context = useContext(SessionContext);
+  const {allSessions,setAllSessions,setSelectedSummary,setSelectedTranscript} = context;
 
   useEffect(() => {
-    // Load sessions when component mounts
     loadSessions();
-    // window.addEventListener('sessionsUpdated', loadSessions);
-    // return () => {
-    //   window.removeEventListener('sessionsUpdated', loadSessions);
-    // };
   }, []);
+
+
+
+  const handlePatientClick = (index) => {
+    console.log(index)
+    const session = allSessions[index];
+    if (session) {
+      setSelectedSummary(session.summary);
+      setSelectedTranscript(session.transcript);
+    }
+  };
 
   const loadSessions = () => {
     const savedSessions = JSON.parse(localStorage.getItem('sessions')) || [];
-    // Ensure each session has a read and deleted property if not already present
     const updatedSessions = savedSessions.map(session => ({
       ...session,
       read: session.read ?? true,
       deleted: session.deleted ?? false
     }));
-    setSessions(updatedSessions);
+    setAllSessions(updatedSessions);
   };
 
-  const handleMarkUnread = ({ session, index, updateSession, deleteSession }) => {
-    console.log('Mark as unread clicked', { session, index });
-    // updateSession(index, { ...session, read: false });
+  const handleMarkUnread = (index) => {
+    const updatedSessions = [...allSessions];
+    updatedSessions[index] = { ...updatedSessions[index], read: false };
+    setAllSessions(updatedSessions);
+    localStorage.setItem('sessions', JSON.stringify(updatedSessions));
     setShowMenu(false);
   };
 
-  const handleDelete = ({ session, index, updateSession, deleteSession }) => {
-    console.log('Delete session clicked', { session, index });
-    // deleteSession(index);
+  const handleDelete = (index) => {
+    const updatedSessions = allSessions.filter((session, i) => i !== index);
+    setAllSessions(updatedSessions);
+    localStorage.setItem('sessions', JSON.stringify(updatedSessions));
     setShowMenu(false);
   };
 
-  // Filter sessions based on search query and filter type
   const getFilteredSessions = () => {
-    let filtered = sessions;
+    let filtered = allSessions;
 
     if (searchQuery) {
       filtered = filtered.filter(session =>
@@ -67,11 +80,11 @@ const LeftSection = () => {
   const getFilterCount = (type) => {
     switch (type) {
       case 'all':
-        return sessions.length;
+        return allSessions.length;
       case 'unread':
-        return sessions.filter(session => !session.read).length;
+        return allSessions.filter(session => !session.read).length;
       case 'deleted':
-        return sessions.filter(session => session.deleted).length;
+        return allSessions.filter(session => session.deleted).length;
       default:
         return 0;
     }
@@ -151,90 +164,76 @@ const LeftSection = () => {
       <div className="sessions">
         {filteredSessions.length > 0 ? (
           filteredSessions.map((session, index) => (
-            <div key={index} className="session-item">
-              <div className="session-header">
-                <h3
-                  className="session-name"
-                  onClick={() => setSearchQuery(session.name)}
-                  style={{ cursor: 'pointer' }}
-                  title="Click to search this patient"
-                >{session.name}</h3>
-                {session.pronouns && <span className="session-pronouns">({session.pronouns})</span>}
-              </div>
-              <div className="session-info">
-                <span className="session-timestamp">{session.timestamp}</span>
-                <span className="session-duration">Duration: {session.duration}</span>
-              </div>
+            <div key={index} onClick={()=>handlePatientClick(index)} className="session-item">
               <div
-                className="session-item relative group border"  // Added border for visibility
+                className="session-header flex justify-between items-center p-2"
                 onMouseLeave={() => {
-                  console.log('Mouse left session item');
                   setShowMenu(false);
                 }}
               >
-                <div className="session-header flex justify-between items-center p-2">  {/* Changed to items-center */}
-                  <div>
-                    <h3
-                      className="session-name cursor-pointer"
-                      onClick={() => setSearchQuery(session.name)}
-                      title="Click to search this patient"
-                    >
-                      {session.name}
-                      {!session.read && <span className="ml-2 text-blue-500">•</span>}
-                    </h3>
-                    {session.pronouns && <span className="session-pronouns">({session.pronouns})</span>}
-                  </div>
-                  <div
-                    className="relative"  // Removed opacity classes
-                    onMouseEnter={() => {
-                      console.log('Mouse entered more options');
-                      setShowMenu(true);
+                <div>
+                  {/* Single session name with unread indicator */}
+                  <h3
+                    className="session-name cursor-pointer"
+                    onClick={() => setSearchQuery(session.name)}
+                    title="Click to search this patient"
+                  >
+                    {session.name}
+                    {!session.read && <span className="ml-2 text-blue-500">•</span>}
+                  </h3>
+                  {session.pronouns && <span className="session-pronouns">({session.pronouns})</span>}
+                </div>
+
+                <div
+                  className="relative"
+                  onMouseEnter={() => setShowMenu(true)}
+                >
+                  {/* More options (three vertical dots) */}
+                  <button
+                    className="p-1 rounded-full hover:bg-gray-100"
+                    aria-label="More options"
+                    onClick={() => {
+                      setShowMenu(!showMenu);
                     }}
                   >
-                    <button
-                      className="p-1 rounded-full hover:bg-gray-100"
-                      aria-label="More options"
-                      onClick={() => {
-                        console.log('More options button clicked');
-                        setShowMenu(!showMenu);
+                    <MoreVertical size={16} />
+                  </button>
+
+                  {/* Dropdown menu for options */}
+                  {showMenu && (
+                    <div
+                      className="absolute right-0 top-8 w-48 py-2 bg-white rounded-md shadow-lg z-50 border border-gray-200"
+                      onClick={(e) => {
+                        e.stopPropagation();
                       }}
                     >
-                      <MoreVertical size={16} />
-                    </button>
-                    {showMenu && (
-                      <div
-                        className="absolute right-0 top-8 w-48 py-2 bg-white rounded-md shadow-lg z-50 border border-gray-200"
+                      <button
+                        className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100"
                         onClick={(e) => {
-                          console.log('Dropdown menu clicked');
                           e.stopPropagation();
+                          handleMarkUnread(index);
                         }}
                       >
-                        <button
-                          className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleMarkUnread();
-                          }}
-                        >
-                          Mark as unread
-                        </button>
-                        <button
-                          className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-red-600"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleDelete();
-                          }}
-                        >
-                          Delete Session
-                        </button>
-                      </div>
-                    )}
-                  </div>
+                        Mark as unread
+                      </button>
+                      <button
+                        className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-red-600"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDelete(index);
+                        }}
+                      >
+                        Delete Session
+                      </button>
+                    </div>
+                  )}
                 </div>
-                <div className="session-info px-2 pb-2">
-                  <span className="session-timestamp mr-2">{session.timestamp}</span>
-                  <span className="session-duration">Duration: {session.duration}</span>
-                </div>
+              </div>
+
+              {/* Session info (timestamp and duration) */}
+              <div className="session-info px-2 pb-2">
+                <span className="session-timestamp mr-2">{session.timestamp}</span>
+                <span className="session-duration">Duration: {session.duration}</span>
               </div>
             </div>
           ))
@@ -243,10 +242,10 @@ const LeftSection = () => {
             {searchQuery ? 'No matching sessions found' : 'No Recording Session yet'}
           </div>
         )}
+
       </div>
     </div>
   );
 };
-
 
 export default LeftSection;

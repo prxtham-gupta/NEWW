@@ -1,8 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import OpenAI from 'openai';
 import './App.css';
 import SessionContent from './SessionContent';
 import ProfileDropdown from './ProfileDropdown';
+import SessionContext from './context/SessionContext';
 // Azure Storage configurations
 const STORAGE_URL = 'https://humbigenai.blob.core.windows.net';
 const CONTAINER = 'rawaudiofiles';
@@ -16,7 +17,7 @@ const DEMO_SUMMARIES = {
   summary1: `Diagnosis: Type 3 Grade B periodontitis with deep probing depths, inflammation, and periodontal abscess (teeth 20-23). Signs include significant tooth mobility, furcation involvement, and generalized moderate-severe bone loss. Recommended treatment plan: full-mouth laser periodontal therapy with possible orthodontic intervention. Recovery period: 1-2 days. Follow-up scheduled for 6-9 months post-procedure.`,
   summary2: `You have been diagnosed with advanced gum disease affecting multiple teeth, particularly in the back of your mouth. We found deep pockets in your gums, inflammation, and some bone loss. We recommend laser therapy to treat the gum disease, which is less invasive than traditional surgery. You may need 1-2 days to recover after the procedure. We'll need to see you back in 6-9 months to check your progress.`
 };
-const Dashboard = ({ user: initialUser }) => {
+const Dashboard = () => {
   // State Management
   const [currentTab, setCurrentTab] = useState('record');
   const [isRecording, setIsRecording] = useState(false);
@@ -34,25 +35,26 @@ const Dashboard = ({ user: initialUser }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadedFileUrl, setUploadedFileUrl] = useState('');
   const [summaryTranscript, setSummaryTranscript] = useState(false);
-  const [user, setUser] = useState("");
+  // const [user, setUser] = useState("");
   const [recordedFileURL, setRecordedFileUrl] = useState(null);
   const [recordedFile, setRecordedFile] = useState(null);
-  const [isLoading,setIsLoading] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false);
+  const [sessions, setSessions] = useState([]);
   // New state for tracking if we're in a session
   const [isInSession, setIsInSession] = useState(false);
   // Refs
   const mediaRecorderRef = useRef(null);
   const chunksRef = useRef([]);
-  useEffect(()=>{
-    setUser(initialUser);
-    if(transcript===''){
+  const context = useContext(SessionContext);
+  const { selectedSummary, seledctedTranscript,user,setUser } = context;
+
+
+  useEffect(() => {
+    if (transcript === '') {
       setSummaries(DEMO_SUMMARIES);
     }
+  }, [])
 
-  },[])
-  
-  console.log(user);
 
   // Initialize OpenAI
   const openai = new OpenAI({
@@ -196,7 +198,7 @@ const Dashboard = ({ user: initialUser }) => {
     }
   };
 
-  
+
 
 
 
@@ -279,11 +281,11 @@ const Dashboard = ({ user: initialUser }) => {
     setIsLoading(true);
 
     const url = "http://localhost:8005/summarize-audio/";
-  
+
     // Create FormData to send the file
     const formData = new FormData();
     formData.append("file", file, file.name); // Append file with its name
-  
+
     try {
       const response = await fetch(url, {
         method: "POST",
@@ -292,7 +294,7 @@ const Dashboard = ({ user: initialUser }) => {
         },
         body: formData,
       });
-  
+
       if (response.ok) {
         const result = await response.json();
         console.log(result); // Log the result
@@ -311,30 +313,38 @@ const Dashboard = ({ user: initialUser }) => {
       return { error: error.message };
     }
   };
-  
-  
-  
+
+
+
 
   // Example usage: File input to trigger upload
   const handleFileChange = (event) => {
-  const file = event.target.files[0];
-  if (file) {
-    // Extract file extension
-    const fileExtension = file.name.split('.').pop().toLowerCase();
+    const file = event.target.files[0];
+    if (file) {
+      // Extract file extension
+      const fileExtension = file.name.split('.').pop().toLowerCase();
 
-    if (fileExtension === 'txt') {
-      console.log("TXT file detected. Running summarizeAudio function...");
-      summarizeAudio(file); // Call summarizeAudio for .txt files
-    } else {
-      console.log("Non-TXT file detected. Running both functions...");
-      audioToText(file); // Call audioToText for other file types
-      summarizeAudio(file); // Call summarizeAudio for other file types
+      if (fileExtension === 'txt') {
+        const reader = new FileReader(); // Create a FileReader object
+        reader.onload = (e) => {
+          const content = e.target.result; // Get the file content
+          setTranscript(content); // Store the content as string in state
+        };
+
+        reader.readAsText(file);
+        console.log(file);
+        console.log("TXT file detected. Running summarizeAudio function...");
+        summarizeAudio(file); // Call summarizeAudio for .txt files
+      } else {
+        console.log("Non-TXT file detected. Running both functions...");
+        audioToText(file); // Call audioToText for other file types
+        summarizeAudio(file); // Call summarizeAudio for other file types
+      }
+
+      setSelectedFile(file);
+      setShowPopup(true);
     }
-
-    setSelectedFile(file);
-    setShowPopup(true);
-  }
-};
+  };
 
 
   // // HTML input for file upload (for testing)
@@ -356,7 +366,23 @@ const Dashboard = ({ user: initialUser }) => {
   //     setShowPopup(true);
   //   }
   // };
-
+  const saveSessionData = ({ summaryKey, updatedText, type }) => {
+    const updatedSessions = [...sessions];
+    if (type === 'summary') {
+      updatedSessions.forEach(session => {
+        if (session.name === patientName) {
+          session[summaryKey] = updatedText;
+        }
+      });
+    } else if (type === 'transcript') {
+      updatedSessions.forEach(session => {
+        if (session.name === patientName) {
+          session.transcript = updatedText;
+        }
+      });
+    }
+    setSessions(updatedSessions);
+  };
   // Process Functions
   const processContent = async (audioContent, isFile = false) => {
     setIsProcessing(true);
@@ -526,6 +552,9 @@ const Dashboard = ({ user: initialUser }) => {
     };
   }, [intervalId, isRecording]);
 
+  console.log(user)
+
+
   return (
     <div className="dashboard">
       {/* Top Row: Welcome and Profile */}
@@ -536,8 +565,7 @@ const Dashboard = ({ user: initialUser }) => {
           </div>
         </div>
         <ProfileDropdown
-          fullName={user?.fullName || 'User'}
-          title={user?.title}
+          user={user}
           onProfileUpdate={handleProfileUpdate}
         />
       </div>
@@ -601,6 +629,7 @@ const Dashboard = ({ user: initialUser }) => {
         handleStartNewSession={handleStartNewSession}
         setSummaries={setSummaries}
         isLoading={isLoading}
+        saveSessionData={saveSessionData}
       />
     </div>
   );

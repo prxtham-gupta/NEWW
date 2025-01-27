@@ -3,8 +3,7 @@ import SessionContext from "./SessionContext";
 
 const SessionProvider = (props) =>{
     const [allSessions,setAllSessions]=useState([]);
-    const [selectedSummary,setSelectedSummary] =  useState(null);
-    const [seledctedTranscript,setSelectedTranscript]=useState(null);
+    const [selectedSessionId,setSelectedSessionId]=useState(null);
     const [user,setUser] = useState(null);
     useEffect(()=>{
         const loggedInUser = sessionStorage.getItem("user");
@@ -12,9 +11,8 @@ const SessionProvider = (props) =>{
           setUser(JSON.parse(loggedInUser));
         }
       },[])
-
     return (
-        <SessionContext.Provider value={{allSessions,setAllSessions,setSelectedSummary,selectedSummary,setSelectedTranscript,seledctedTranscript,setUser,user}}>
+        <SessionContext.Provider value={{selectedSessionId,setSelectedSessionId,allSessions,setAllSessions,setUser,user}}>
             {props.children}
         </SessionContext.Provider>
     )

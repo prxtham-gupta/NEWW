@@ -9,12 +9,9 @@ const LeftSection = () => {
   const [filterType, setFilterType] = useState('all');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
-  // const [selectedSummary, setSelectedSummary] = useState(null);
-  // const [selectedTranscript, setSelectedTranscript] = useState(null);
-  // const [sessionList, setSessionList] = useState(sessions); // Add state for sessions
 
   const context = useContext(SessionContext);
-  const {allSessions,setAllSessions,setSelectedSummary,setSelectedTranscript} = context;
+  const { allSessions, setAllSessions, setSelectedSessionId } = context;
 
   useEffect(() => {
     loadSessions();
@@ -23,12 +20,7 @@ const LeftSection = () => {
 
 
   const handlePatientClick = (index) => {
-    console.log(index)
-    const session = allSessions[index];
-    if (session) {
-      setSelectedSummary(session.summary);
-      setSelectedTranscript(session.transcript);
-    }
+    setSelectedSessionId(index)
   };
 
   const loadSessions = () => {
@@ -164,18 +156,18 @@ const LeftSection = () => {
       <div className="sessions">
         {filteredSessions.length > 0 ? (
           filteredSessions.map((session, index) => (
-            <div key={index} onClick={()=>handlePatientClick(index)} className="session-item">
+            <div key={index}  className="session-item">
               <div
-                className="session-header flex justify-between items-center p-2"
+                className="session-header"
                 onMouseLeave={() => {
                   setShowMenu(false);
                 }}
+                
               >
-                <div>
+                <div className='session-name-container' onClick={() => handlePatientClick(index)}>
                   {/* Single session name with unread indicator */}
                   <h3
                     className="session-name cursor-pointer"
-                    onClick={() => setSearchQuery(session.name)}
                     title="Click to search this patient"
                   >
                     {session.name}
@@ -183,51 +175,39 @@ const LeftSection = () => {
                   </h3>
                   {session.pronouns && <span className="session-pronouns">({session.pronouns})</span>}
                 </div>
+                <div className='three-dot' onClick={()=>setShowMenu(true)}>
+                  <MoreVertical size={16} />
+                </div>
+                
 
-                <div
-                  className="relative"
-                  onMouseEnter={() => setShowMenu(true)}
-                >
-                  {/* More options (three vertical dots) */}
-                  <button
-                    className="p-1 rounded-full hover:bg-gray-100"
-                    aria-label="More options"
-                    onClick={() => {
-                      setShowMenu(!showMenu);
+                {/* Dropdown menu for options */}
+                {showMenu && (
+                  <div
+                    className="absolute right-0 top-8 w-48 py-2 bg-white rounded-md shadow-lg z-50 border border-gray-200"
+                    onClick={(e) => {
+                      e.stopPropagation();
                     }}
                   >
-                    <MoreVertical size={16} />
-                  </button>
-
-                  {/* Dropdown menu for options */}
-                  {showMenu && (
-                    <div
-                      className="absolute right-0 top-8 w-48 py-2 bg-white rounded-md shadow-lg z-50 border border-gray-200"
+                    <button
+                      className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100"
                       onClick={(e) => {
                         e.stopPropagation();
+                        handleMarkUnread(index);
                       }}
                     >
-                      <button
-                        className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleMarkUnread(index);
-                        }}
-                      >
-                        Mark as unread
-                      </button>
-                      <button
-                        className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-red-600"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleDelete(index);
-                        }}
-                      >
-                        Delete Session
-                      </button>
-                    </div>
-                  )}
-                </div>
+                      Mark as unread
+                    </button>
+                    <button
+                      className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 text-red-600"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDelete(index);
+                      }}
+                    >
+                      Delete Session
+                    </button>
+                  </div>
+                )}
               </div>
 
               {/* Session info (timestamp and duration) */}

@@ -45,7 +45,6 @@ const ProfileDropdown = ({ user, onProfileUpdate }) => {
         break;
       case 'logout':
         // Handle logout click
-        console.log('Logout clicked');
         break;
       default:
         break;
@@ -53,7 +52,6 @@ const ProfileDropdown = ({ user, onProfileUpdate }) => {
     setIsOpen(false);
   };
 
-  console.log(user)
 
   return (
     <div className="profile-container" ref={dropdownRef}>
@@ -98,7 +96,6 @@ const ProfileDropdown = ({ user, onProfileUpdate }) => {
         isOpen={showPreferencesModal}
         onClose={() => setShowPreferencesModal(false)}
         onSave={(preferencesData) => {
-          console.log('Saving preferences:', preferencesData);
           setShowPreferencesModal(false);
         }}
       />

@@ -1,8 +1,11 @@
 // AudioSection.js
-import React from 'react';
-import { Download } from 'lucide-react';
-
+import { useEffect, useRef, useState } from 'react';
+import './App.css'
 const AudioSection = ({ audioUrl }) => {
+  const [isPlaying,setIsPlaying] = useState(false);
+  const audioRef = useRef(null);
+  console.log(audioUrl)
+
   const handleDownload = () => {
     if (audioUrl) {
       const a = document.createElement('a');
@@ -15,27 +18,37 @@ const AudioSection = ({ audioUrl }) => {
   };
 
   return (
-    <div className="mt-6 bg-white rounded-lg border border-gray-200">
-      <div className="p-4">
-        <h2 className="text-sm font-medium text-gray-600 mb-3">Audio</h2>
-        <div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4 items-center">
-          <span className="text-xs text-gray-500 min-w-[60px]">Recording</span>
-          <audio
-            controls
-            src={audioUrl || null}
-            className="w-full sm:flex-1"
-          />
+    <div className="audio">
+      <h2 className="title">Audio</h2>
+      <div className="wrapper">
+        <span className="text">Recording</span>
+        <div className='mic-download'>
+          <audio controls src={audioUrl || null} ref={audioRef} className='player' style={{ width: '900px' }} />
           <button
             onClick={handleDownload}
-            className="flex items-center justify-center px-4 py-2 rounded-full text-purple-600 hover:bg-purple-50 transition-colors duration-200"
+            className="btn"
             aria-label="Download recording"
           >
-            <Download className="w-5 h-5 mr-2" />
-            <span className="text-sm">Download</span>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="icon"
+            >
+              <path
+                d="M3 19H21V21H3V19ZM13 13.172L19.071 7.1L20.485 8.514L12 17L3.515 8.515L4.929 7.1L11 13.17V2H13V13.172Z"
+                fill="#252626"
+              />
+            </svg>
+            <span className="label"></span>
           </button>
         </div>
+
       </div>
     </div>
+
   );
 };
 

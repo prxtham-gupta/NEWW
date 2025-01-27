@@ -209,10 +209,21 @@
 
 /* Summary Section */
 .summary-options-title {
-  font-size: 18px;
-  font-weight: 500;
+  width: 196px;
+  height: 32px;
+  top: 24px;
+  left: 30px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
   margin-bottom: 16px;
+  opacity: 1; /* Ensures the text is visible */
 }
+
 
 .summaries-container {
   display: grid;
@@ -221,33 +232,56 @@
   margin-bottom: 40px;
 }
 
-.summary-box {
-  background: white;
-  border: 1px solid #e5e7eb;
-  border-radius: 24px;
-  padding: 16px;
-  width: 500px;
-}
-.summary-boxx
-{
+
+  .summary-box {
+    width: 500px;
+    position: relative; /* Added position for handling `top` and `left` */
+    left: 30px;
+    border-radius: 25px; /* Rounded corners on the top-left */
+    border: 1px solid #E3E3E3; /* Corrected the border to display as intended */
+    opacity: 1; /* Set to 1 to make the box visible */
+    background-color: white; /* Optional: add background color to make it stand out */
+    padding: 16px; /* Optional: add padding for internal spacing */
+  }
+  
+
+
+.summary-boxx {
   background: white;
   border: 1px solid #e5e7eb;
   border-radius: 24px;
   padding: 16px;
   width: 1100px;
 }
+
 .summary-box h3 {
-  color: #7c3aed;
-  font-size: 14px;
+  width: 102px;
+  height: 32px;
+  top: 24px;
+  left: 24px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 20px;
   font-weight: 500;
-  margin-bottom: 8px;
+  line-height: 32px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #6B21A8; /* Ensures the text is visible against the background */
+  opacity: 1; /* Makes the text visible */
+  white-space: nowrap;
 }
 
-.summary-box p {
-  color: #4b5563;
-  font-size: 14px;
-  line-height: 1.5;
-  margin-bottom: 16px;
+
+.summary-markdown{
+  color: black;
+  font-family: "DM Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  left: 24px;
 }
 
 .prefer-button {
@@ -272,10 +306,16 @@
 }
 
 .transcript-title {
-  font-size: 18px;
-  font-weight: 500;
-  margin-bottom: 16px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 24px; /* Keep only one font-size */
+  font-weight: 400; /* Keep only one font-weight */
+  line-height: 32px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  margin-bottom: 16px; /* Add spacing below the title */
 }
+
 
 .transcript-box {
   background: white;
@@ -286,9 +326,12 @@
 }
 
 .transcript-text {
-  color: #4b5563;
+  color: black;
   font-size: 14px;
-  line-height: 1.5;
+  font-family: "DM Sans", sans-serif;
+  font-size: 16px; /* Removed the smaller font-size */
+  font-weight: 400;
+  line-height: 22px;
   margin-bottom: 16px;
 }
 
@@ -372,67 +415,15 @@
 .edit-confirm-button:hover {
   background-color: #faf5ff;
 }
-.audio {
-  margin-top: 1.5rem;
-  background-color: #ffffff;
-  border-radius: 0.5rem;
-  border: 1px solid #e5e7eb;
-  padding: 1rem;
-}
 
-.title {
-  font-size: 1rem;
-  font-weight: 500;
-  color: #1f2937;
-  margin-bottom: 0.5rem;
-}
 
-.text {
-  font-size: 0.875rem;
-  background: #FAF5FF;
 
-  margin-bottom: 1rem;
-}
 
-.wrapper {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.player {
-  
-  width: 800px;
-  height: 38px;
-  border: 1px solid #a855f7;
-  border-radius: 1.375rem;
-  padding: 0.5rem;
-  left: 100px;
-}
-
-.btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem;
-  background-color: transparent;
-  color: #1f2937;
-  cursor: pointer;
-  transition: color 0.2s, background-color 0.2s;
-}
-
-.btn:hover {
-  color: #8b5cf6;
-  background-color: #f3f4f6;
-}
-
-.icon {
-  width: 24px;
-  height: 24px;
-}
 
 
 .circular-container {
-  margin-left: 500px; /* Move to the right */
-  margin-top: 240px;  /* Move down */
+  margin-left: 500px;
+  /* Move to the right */
+  margin-top: 240px;
+  /* Move down */
 }

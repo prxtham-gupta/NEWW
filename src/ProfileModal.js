@@ -25,7 +25,6 @@ const ProfileModal = ({ isOpen, onClose, user, onSave }) => {
     onSave(formData);
     onClose();
   };
-  console.log(user)
 
   if (!isOpen) return null;
 

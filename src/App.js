@@ -7,7 +7,7 @@ import RecordSession from './components/RecordSession';
 import UploadSession from './components/UploadSession';
 import SessionContent from './SessionContent';
 import SessionContext from './context/SessionContext';
-
+import Login from './Login';
 const App = () => {
   const [isCreatingAccount, setIsCreatingAccount] = useState(false);
   const [formData, setFormData] = useState({
@@ -35,7 +35,6 @@ const App = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  console.log(user);
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const { username, password, confirmPassword, fullName } = formData;
@@ -88,7 +87,6 @@ const App = () => {
     });
   };
 
-  console.log(isLoggedIn)
 
   const renderLoginForm = () => (
     <div className="login-box">
@@ -160,31 +158,17 @@ const App = () => {
 
   return (
     <div className="app-container">
-      <div className={`left-section-wrapper ${isLoggedIn?"":"hidden"}`}>
-        <LeftSection />
-      </div>
       <div className="main-content">
         <Routes>
           <Route
             path="/"
-            element={!isLoggedIn ? renderLoginForm() : null}
+            element={!isLoggedIn ? <Login  setIsLoggedIn={setIsLoggedIn} /> : null}
           />
           <Route
             path="/dashboard"
             element={<Dashboard user={user} />}
           />
-          {/* RecordSession component now handles both recording and uploading */}
-          <Route
-            path="/record-session"
-            element={<RecordSession />}
-          />
-           <Route
-            path="/upload-session"
-            element={
-              <UploadSession />
-            }
-          />
-        </Routes>
+        </Routes> 
       </div>
     </div>
   );

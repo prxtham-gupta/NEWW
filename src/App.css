@@ -7,14 +7,29 @@
 }
 
 .app-container {
+  margin: 0;
+  padding: 0;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100vw;
   height: 100vh;
   background: #FAF5FF99;
+  overflow: hidden;
+  scrollbar-width: none;
+}
+
+.left-section-wrapper{
+  width: 24%;
+  position: relative;
+  border:#A4A4A4 1px solid;
+}
+
+.right-section-wrapper{
+    width: 76%;
+    position: relative;
 }
 
 .login-box {
+  position: relative;
   width: 100%;
   max-width: 400px;
   padding: 20px;
@@ -76,16 +91,22 @@ p button:hover {
 }
 
 .left-section {
-  width: 380px;
-  height: 100vh;
-  background-color: white; /* Black background */
-  color: #090909; /* White text color */
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: white;
+  /* Black background */
+  color: #090909;
+  /* White text color */
   padding: 20px;
-  box-shadow: 2px 0 5px rgb(246, 245, 245); /* Subtle shadow for depth */
+  box-shadow: 2px 0 5px rgb(246, 245, 245);
+  /* Subtle shadow for depth */
   display: flex;
   flex-direction: column;
-  gap: 20px; /* Spacing between elements */
-  overflow-y: auto; /* Enable scrolling if content overflows */
+  gap: 20px;
+  /* Spacing between elements */
+  overflow: hidden;
+  /* Enable scrolling if content overflows */
 }
 
 /* Logo */
@@ -95,39 +116,53 @@ p button:hover {
   gap: 10px;
   font-size: 24px;
   font-weight: bold;
-  color: #a020f0; /* Purple color for logo text */
+  color: #a020f0;
+  /* Purple color for logo text */
 }
+
 .hidden {
   display: none;
 }
 
 /* Main content area */
 .main-content {
-  flex: 1;
+  position: relative;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
 }
+
 .logo-icon {
-  font-size: 28px; /* Slightly larger icon size */
+  font-size: 28px;
+  /* Slightly larger icon size */
 }
 
 /* Search Bar Container */
 .search-container {
-  width: 100%; /* Full width of parent */
+  width: 100%;
+  /* Full width of parent */
 }
 
 .search-bar {
-  width: 100%; /* Full width of the container */
+  width: 100%;
+  /* Full width of the container */
   padding: 10px;
-  border: none; /* Remove default border */
-  border-radius: 20px; /* Rounded edges for modern look */
-  font-size: 14px; /* Standard font size */
-  outline: none; /* Remove focus outline */
-  background-color: white; /* Dark gray background */
-  color: black; /* White text color */
-  box-shadow: 0 2px 5px rgb(145, 142, 142); /* Subtle shadow */
+  border: none;
+  /* Remove default border */
+  border-radius: 20px;
+  /* Rounded edges for modern look */
+  font-size: 14px;
+  /* Standard font size */
+  outline: none;
+  /* Remove focus outline */
+  background-color: white;
+  /* Dark gray background */
+  color: black;
+  /* White text color */
+  box-shadow: 0 2px 5px rgb(145, 142, 142);
+  /* Subtle shadow */
 }
 
 /* Sessions List */
@@ -148,6 +183,16 @@ p button:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-right: 10px;
+}
+
+.session-name-container{
+  padding: 10px 15px 10px 15px;
+}
+
+.session-name-container:hover{
+  background-color: rgb(235, 231, 231);
+  border-radius: 4px;
 }
 
 /* Session name style */
@@ -157,8 +202,17 @@ p button:hover {
 }
 
 /* Dropdown menu styling */
-.relative {
-  position: relative;
+.three-dot{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.three-dot:hover{
+  background-color: rgb(212, 210, 210);
 }
 
 button[aria-label="More options"] {
@@ -171,12 +225,14 @@ button[aria-label="More options"] {
 .relative .absolute {
   position: absolute;
   right: 0;
-  top: 24px; /* Adjust this if necessary */
+  top: 24px;
+  /* Adjust this if necessary */
   background-color: white;
   border: 1px solid #e2e2e2;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
-  width: 150px; /* Set width to keep it compact */
+  width: 150px;
+  /* Set width to keep it compact */
   padding: 4px 0;
   z-index: 10;
 }
@@ -188,11 +244,13 @@ button[aria-label="More options"] {
   background-color: white;
   border: none;
   text-align: left;
-  font-size: 14px; /* Make text size smaller */
+  font-size: 14px;
+  /* Make text size smaller */
   color: #333;
   display: flex;
   align-items: center;
-  gap: 8px; /* Space between icon and text */
+  gap: 8px;
+  /* Space between icon and text */
 }
 
 .relative .absolute button:hover {
@@ -219,14 +277,23 @@ button[aria-label="More options"] {
   color: #7c3aed;
   font-weight: 500;
 }
+
 .session-item .relative button {
-  margin-right: 8px; /* Adjust this value as needed */
+  margin-right: 8px;
+  /* Adjust this value as needed */
 }
 
 .session-item .relative {
   display: flex;
   align-items: center;
-  gap: 20px; /* Adds space between icons or elements */
+  gap: 20px;
+  /* Adds space between icons or elements */
+}
+
+
+.sessions{
+  overflow-y: scroll;
+  scrollbar-width: none;
 }
 
 .no-sessions {
@@ -235,49 +302,73 @@ button[aria-label="More options"] {
   color: #666;
   font-size: 14px;
 }
+
 /* Dashboard Styles */
 /* Dashboard Container */
+
 .dashboard {
-  width: 76%; /* Fixed width */
-  height: 150px; /* Fixed height */
-  position: absolute;
+  width: 100%;
+  /* Fixed width */
+  height: 100vh;
+  position: relative;
+  margin: 0;
   top: 0;
-  left: 381px;
   display: flex;
-  flex-direction: column; /* Stack welcome message and tabs */
-  justify-content: flex-start;
-  padding: 20px; /* Padding for internal spacing */
-  background-color: white; /* White background */
-  border: 1px solid #A4A4A4; /* Light gray border */
- 
+  /* Stack welcome message and tabs */
+  background-color: white;
+  /* White background */
+  border: 1px solid #A4A4A4;
+  /* Light gray border */
+
+}
+
+.dashboard-header {
+  height: 150px;
+  padding: 20px;
+  /* Padding for internal spacing */
+  padding-bottom: 5px;
+  border-bottom: #A4A4A4 1px solid;
 }
 
 /* Top Row (Welcome Message and Profile Section) */
 .dashboard-top {
   display: flex;
   align-items: flex-start;
-  justify-content: space-between; /* Space between welcome message and profile */
-  margin-bottom: 5px; /* Space below the top row */
+  justify-content: space-between;
+  /* Space between welcome message and profile */
+  margin-bottom: 5px;
+  /* Space below the top row */
   z-index: 3;
 }
+
 /* Welcome Message */
 /* Welcome Message */
 .welcome-message-container {
   display: flex;
-  flex-direction: column; /* Stack "Welcome back" and tabs vertically */
-  justify-content: flex-start; /* Align to the extreme left */
-  padding-left: 0px; /* Space between "Welcome back" and tabs */
+  flex-direction: column;
+  /* Stack "Welcome back" and tabs vertically */
+  justify-content: flex-start;
+  /* Align to the extreme left */
+  padding-left: 0px;
+  /* Space between "Welcome back" and tabs */
 }
+
 .welcome-message h2 {
   padding-top: 20px;
   font-size: 24px;
   font-weight: bold;
-  color: #a020f0; /* Purple text color */
-  margin: 0; /* Remove default margin */
-  line-height: 1.2; /* Adjust line height */
-  white-space: nowrap; /* Prevent text wrapping */
-  overflow: hidden; /* Handle overflow gracefully */
-  text-overflow: ellipsis; /* Add ellipsis if the text is too long */
+  color: #a020f0;
+  /* Purple text color */
+  margin: 0;
+  /* Remove default margin */
+  line-height: 1.2;
+  /* Adjust line height */
+  white-space: nowrap;
+  /* Prevent text wrapping */
+  overflow: hidden;
+  /* Handle overflow gracefully */
+  text-overflow: ellipsis;
+  /* Add ellipsis if the text is too long */
   padding-right: 60px;
 }
 
@@ -287,7 +378,8 @@ button[aria-label="More options"] {
   padding-right: 100px;
   display: flex;
   align-items: center;
-  gap: 10px; /* Space between initials and full name */
+  gap: 10px;
+  /* Space between initials and full name */
 }
 
 /* Profile Initials */
@@ -295,8 +387,10 @@ button[aria-label="More options"] {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: #f3e8ff; /* Light purple background */
-  color: #7c3aed; /* Purple text color */
+  background-color: #f3e8ff;
+  /* Light purple background */
+  color: #7c3aed;
+  /* Purple text color */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -308,13 +402,15 @@ button[aria-label="More options"] {
 .profile .full-name {
   font-size: 16px;
   font-weight: 500;
-  color: #333; /* Dark gray */
+  color: #333;
+  /* Dark gray */
 }
 
 /* Dropdown Arrow */
 .profile .dropdown {
   font-size: 14px;
-  color: #333; /* Dark gray */
+  color: #333;
+  /* Dark gray */
   cursor: pointer;
 }
 
@@ -322,7 +418,8 @@ button[aria-label="More options"] {
 .dashboard-tabs {
   top: 20px;
   display: flex;
-  gap: 30px; /* Space between tabs */
+  gap: 30px;
+  /* Space between tabs */
 }
 
 /* Tab Item */
@@ -330,14 +427,16 @@ button[aria-label="More options"] {
   padding-top: 35px;
   font-size: 16px;
   font-weight: 500;
-  color: #333; /* Dark gray */
+  color: #333;
+  /* Dark gray */
   cursor: pointer;
   position: relative;
 }
 
 /* Active Tab */
 .dashboard-tabs .tab.active {
-  color: #7c3aed; /* Purple color for active tab */
+  color: #7c3aed;
+  /* Purple color for active tab */
 }
 
 .dashboard-tabs .tab.active::after {
@@ -347,56 +446,79 @@ button[aria-label="More options"] {
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: #7c3aed; /* Purple underline for active tab */
+  background-color: #7c3aed;
+  /* Purple underline for active tab */
 }
+
+
+.session-content {
+  width: 100%;
+  height: calc(100vh - 150px);  
+  overflow: scroll;
+  padding: 20px;
+  background-color: #FAF5FF99;
+}
+
+
 /* Record Session Container */
 
 /* Recording Button */
 .recording-button {
   width: 200px;
   height: 50px;
-  background-color: #7c3aed; /* Purple background */
-  color: white; /* White text */
+  background-color: #7c3aed;
+  /* Purple background */
+  color: white;
+  /* White text */
   font-size: 16px;
   font-weight: bold;
   border: none;
-  border-radius: 25px; /* Rounded button */
+  border-radius: 25px;
+  /* Rounded button */
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px; /* Space for icons or text */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for button */
+  gap: 8px;
+  /* Space for icons or text */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* Subtle shadow for button */
 }
 
 /* Start Button Specific */
 .recording-button.start {
-  background-color: #7c3aed; /* Purple background for start */
+  background-color: #7c3aed;
+  /* Purple background for start */
 }
 
 /* Stop Button Specific */
 .recording-button.stop {
-  background-color: #e53e3e; /* Red background for stop */
+  background-color: #e53e3e;
+  /* Red background for stop */
 }
 
 /* Session Info */
 .session-info {
   text-align: center;
-  margin-top: 20px; /* Space between button and text */
-  color: #333; /* Dark gray text */
+  margin-top: 20px;
+  /* Space between button and text */
+  color: #333;
+  /* Dark gray text */
 }
 
 .session-info h3 {
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 10px;
-  color: #7c3aed; /* Purple text for title */
+  color: #7c3aed;
+  /* Purple text for title */
 }
 
 .session-info p {
   font-size: 14px;
   line-height: 1.5;
-  color: #666; /* Medium gray for description */
+  color: #666;
+  /* Medium gray for description */
 }
 
 
@@ -410,16 +532,19 @@ button[aria-label="More options"] {
   max-width: 400px;
   padding: 40px;
   text-align: center;
-  background-color: white; /* White background */
+  background-color: white;
+  /* White background */
   border-radius: 10px;
-  border: 2px dashed #a020f0; /* Purple dashed border */
+  border: 2px dashed #a020f0;
+  /* Purple dashed border */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Upload Icon */
 .upload-icon {
   font-size: 48px;
-  color: #a020f0; /* Purple color */
+  color: #a020f0;
+  /* Purple color */
   margin-bottom: 20px;
 }
 
@@ -434,10 +559,11 @@ button[aria-label="More options"] {
   font-size: 14px;
   color: #666;
 }
+
 .record-session-container,
 .upload-session-container {
-  width: 1150px;
-  height: 567px;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -447,6 +573,17 @@ button[aria-label="More options"] {
   position: absolute;
   top: 149px;
   right: 0.1px;
+  border:  black 4px solid;
+}
+
+.record-upload-container{
+  width: 100%;
+  height: 100%;
+  background-color: #f8f6fc;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .recording-button,
@@ -518,6 +655,7 @@ button[aria-label="More options"] {
   padding: 0;
   padding-left: 150px;
 }
+
 .close-button:hover {
   background-color: rgba(0, 0, 0, 0.05);
 }
@@ -531,6 +669,7 @@ button[aria-label="More options"] {
   outline: 2px solid #666;
   outline-offset: 2px;
 }
+
 .form-group {
   margin-bottom: 16px;
 }
@@ -571,7 +710,7 @@ button[aria-label="More options"] {
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-  
+
 }
 
 .skip-button {
@@ -585,15 +724,15 @@ button[aria-label="More options"] {
   border: none;
   color: white;
 }
+
 /* Add these styles to your existing App.css */
 /* Add these styles to App.css */
 
-.session-card {
-  padding: 24px;
-  background: white;
-  border-radius: 8px;
-  margin: 20px;
-  box-shadow: none;
+.session-parent {
+  background-color: #FAF5FF99;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .header-section {
@@ -623,7 +762,39 @@ button[aria-label="More options"] {
   margin-top: 4px;
 }
 
-.summary-options {
+.summary-section {
+  padding: 10px;
+  background-color: white;
+  border: #E0E0E0 1px solid;
+  box-shadow: 0px 0.46px 0px 0px #1A1A1A14;
+  box-shadow: 0px 0.92px 2.77px 0px #1A1A1A14;
+
+  box-shadow: 0px 0.46px 0px 0px #1A1A1A14;
+
+  border-radius: 5px;
+}
+
+.summary-subsection{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.summary-options-title {
+  font-family: DM Sans;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+
+}
+
+
+/* .summary-options {
   margin: 24px 0;
 }
 
@@ -633,34 +804,114 @@ button[aria-label="More options"] {
   color: #000;
   margin-bottom: 16px;
   text-align: left;
-}
+} */
 
 .summaries-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
+  overflow: hidden;
+  width: 100%;
+  position:relative;
+  padding: 10px;
+  justify-content: space-between;
+  display: flex;
+  gap: 10px;
 }
 
-.summary-box {
-  background: #fff;
-  padding: 16px;
-  border: 1px solid #eee;
+.summary-card{
+  width: 100%;
+  border: #E0E0E0 1px solid;
+  border-radius: 5px;
+  box-shadow: white 5px 5px 5px 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.summary-card h3{
+  /* font-family: "DM Sans"; */
+  margin-left: 20px;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 32px;
+  text-align: left;
+  color: #6B21A8;
+}
+
+.mark-down{
+  padding-left: 40px;
+}
+
+.summary-card button{
+  width: 100%;
+  background-color: #FAF5FF;
+}
+
+.mark-container{
+  height: 100%;
+  border: 1px solid #E3E3E3;
+  border-radius: 4px;
+  padding: 30px;
+  overflow-y: scroll;
+
+}
+
+.prefered-summary-card{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.button-container{
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.button-container button{
+  color: black;
+  font-size: 14px;
+  background: none;
+  width: 80px;
+  border: #E0E0E0 2px solid;
+  cursor: pointer;
+  padding: 4px 12px;
   border-radius: 8px;
 }
 
-.summary-box h3 {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 12px;
-  font-weight: 500;
+.editing-summary-container{
+  height: 450px;
 }
 
-.summary-box p {
-  font-size: 14px;
-  line-height: 1.5;
-  color: #000;
-  white-space: pre-wrap;
+.editing-summary-container h2{
+  text-align: left;
+  font-family: "DM Sans";
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+  color: #1A1A1A;
 }
+
+
+
+
+.summary-textarea{
+    height: 80%;
+    border: #E0E0E0 1px solid;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.summary-textarea textarea{
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;      /* Remove outline */
+  resize: none; /* Optional: prevent resizing */
+  box-sizing: border-box;
+}
+.summary-textarea textarea:focus {
+  outline: none; 
+}
+
 
 .i-prefer-text {
   color: #666;
@@ -669,8 +920,54 @@ button[aria-label="More options"] {
   cursor: pointer;
 }
 
+
+
 .transcript-section {
-  margin-top: 24px;
+  max-height: 550px;
+  position: relative;
+  border: 1px solid #E0E0E0;
+  background-color: #FFFFFF;
+  padding: 20px;
+  border: #E0E0E0 1px solid;
+  box-shadow: 0px 0.46px 0px 0px #1A1A1A14;
+  box-shadow: 0px 0.92px 2.77px 0px #1A1A1A14;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.transcript-section h2{
+  text-align: left;
+  font-family: "DM Sans";
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+  color: #1A1A1A;
+}
+
+.transcript-box{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  color: black;
+}
+
+.transcript-textarea{
+  height: 400px;
+    border: #E0E0E0 1px solid;
+    padding: 10px;
+    border-radius: 4px;
+}
+.transcript-textarea textarea{
+  height: 100%;
+  width: 100%;
+  border: none;
+  outline: none;      /* Remove outline */
+  resize: none; /* Optional: prevent resizing */
+  box-sizing: border-box;
 }
 
 .transcript-header {
@@ -696,6 +993,68 @@ button[aria-label="More options"] {
   line-height: 1.5;
   color: #000;
   white-space: pre-wrap;
+}
+
+.audio {
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+  padding: 1rem;
+}
+
+.title {
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.text {
+  font-size: 0.875rem;
+  background: #FAF5FF;
+  text-align: left;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.mic-download{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.player {
+  height: 38px;
+  border: 1px solid #a855f7;
+  border-radius: 1.375rem;
+}
+
+.btn {
+  width: 24px;
+  /* display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem; */
+  background-color: transparent;
+  color: #1f2937;
+  cursor: pointer;
+  transition: color 0.2s, background-color 0.2s;
+}
+
+.btn:hover {
+  color: #8b5cf6;
+  background-color: #f3f4f6;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
 }
 
 .edit-button {
@@ -739,13 +1098,7 @@ button[aria-label="More options"] {
 .download-button:hover {
   color: #000;
 }
-.session-card {
-  background: white;
-  border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+
 
 .card-title {
   font-size: 1.25rem;
@@ -766,13 +1119,10 @@ button[aria-label="More options"] {
   color: #666;
 }
 
-.summaries-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
 
-.summary-box {
+
+
+/* .summary-box {
   background: #f8f9fa;
   padding: 1rem;
   border-radius: 6px;
@@ -788,7 +1138,7 @@ button[aria-label="More options"] {
 .summary-box p {
   color: #666;
   line-height: 1.5;
-}
+} */
 
 .transcript-text {
   color: #333;
@@ -860,6 +1210,7 @@ button[aria-label="More options"] {
 .audio-player {
   width: 100%;
 }
+
 .filter-dropdown {
   position: relative;
   margin: 16px;

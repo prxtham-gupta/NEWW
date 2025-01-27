@@ -1,0 +1,127 @@
+#loginWrapper{
+    height: 96vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#mesh{
+    height: 100%;
+    width: 50%;
+    overflow: hidden;
+    margin-left: 2%;
+    position: relative;
+    border-radius: 15px;
+    background-image: url('./assets/mesh.svg');
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#meshImg{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    object-fit:cover;
+}
+
+#welcomeSection{
+    height: 100%;
+    width: 45%;
+    margin-left: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#welcomeHeader{
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 40px;
+    color: #1A1A1A;
+    margin: 0;
+    font-family: 'DM Sans'
+}
+
+#impilosLogo{
+    margin-bottom: 15px;
+}
+
+#welcomeTextOne, #welcomeTextTwo{
+    color: #424242;
+     font-family: 'DM Sans'
+}
+
+#welcomeTextOne{
+    margin: 5px;
+}
+
+#welcomeTextTwo{
+    margin: 0;
+}
+
+#loginBtn {
+    background-color: #FCFCFC;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #E1E1E2;
+    border-radius: 10px;
+    background-color: #FCFCFC;
+    margin-top: 15px;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 3px 10px;
+}
+
+#loginBtn:active {
+    box-shadow: 0 1px #f2f0f0;
+    transform: translateY(1px);
+  }
+
+#msLogo{
+    height: 18px;
+    width: 18px;
+    margin-right: 5px;
+}
+
+#signInText{
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: #1A1A1A;
+    margin: 0;
+    align-self: center;
+    font-family: 'DM Sans'
+}
+
+.scroll-container {
+    height: 500px; /* Set the height of the visible area */
+    overflow: hidden; /* Hide overflow to create scrolling effect */
+    position: relative; /* Positioning context for absolute child */
+    margin-left: 15%;
+  }
+  
+  .image-wrapper {
+    display: flex;
+    flex-direction: column; /* Stack images vertically */
+    animation: scrollUp 15s linear infinite; /* Animation for scrolling */
+  }
+  
+  .image-wrapper img {
+    width: 60%; /* Make images responsive */
+    height: auto; /* Maintain aspect ratio */
+    margin: 10px;
+    transition: transform 0.5s ease, filter 0.5s ease;
+  }
+  
+  @keyframes scrollUp {
+    0% {
+      transform: translateY(-0%); /* Start at the top of the first set of images */
+    }
+    100% {
+      transform: translateY(-50%); /* Move up by half of the total height (two sets of images) */
+    }
+  }
